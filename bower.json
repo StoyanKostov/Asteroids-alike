@@ -1,0 +1,14 @@
+{
+  "name": "DarkAsYourSoul",
+  "version": "0.0.0",
+  "authors": [
+    "Stoyan Kostov <stoyankostov@gmail.com>"
+  ],
+  "description": "JavaScript based game",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "requirejs": "~2.1.16"
+  }
+}
