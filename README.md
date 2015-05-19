@@ -30,7 +30,8 @@ The game can be played at http://www.skostov.com/games/dark-as-your-soul/
 			drawable/
 				main.js			--> Abstract class that is parent of all models
 			imageRepository/
-				main.js			--> images repo that is responsible form images loading and start the game
+				main.js			--> images repo that is responsible 
+									for images loading and start the game
 			pool/
 				main.js			--> pool used for Bullet and Zombie models
 			ship/
