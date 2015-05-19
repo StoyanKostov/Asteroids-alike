@@ -1,10 +1,10 @@
 # JavaScript remake of Asteroids game
 
 ## Used design patterns
-	- Prototype Pattern 
-	- Facades and Module design pattern
-	- Singelton design pattern
-	- Pool
+- Prototype Pattern 
+- Facades and Module design pattern
+- Singelton design pattern
+- Pool
 
 The game can be played at http://www.skostov.com/games/dark-as-your-soul/
 
@@ -38,3 +38,5 @@ The game can be played at http://www.skostov.com/games/dark-as-your-soul/
 			zombie/
 				main.js			--> game zombies
 		
+## Game art
+- by me
