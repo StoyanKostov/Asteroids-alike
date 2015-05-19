@@ -1,5 +1,4 @@
-define(function (require, exports, module) {
-		var Drawable = require("Drawable");
+define(['Drawable'], function(Drawable) {
 
 		// Create space background
 		function Background(x, y, width, height) {

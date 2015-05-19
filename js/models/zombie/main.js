@@ -1,7 +1,5 @@
-define(['require', 'Drawable', 'appServices'], function (require, exports, module) {
-	var Drawable = require("Drawable"),
-        appServices = require("appServices");
-        
+define(['Drawable', 'appServices'], function (Drawable, appServices) {
+       
     function Zombie(x, y, width, height, angle, alive) {
         var self = this;
         Drawable.call(self, x, y, width, height, angle, alive);

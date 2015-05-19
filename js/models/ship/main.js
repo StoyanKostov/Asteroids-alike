@@ -1,8 +1,4 @@
-define(['require', 'appServices', 'Drawable', 'Pool', 'Bullet'], function(require, exports, module) {
-	var Drawable = require("Drawable"),
-		appServices = require("appServices"),
-		Pool = require("Pool"),
-		Bullet = require("Bullet");
+define(['appServices', 'Drawable', 'Pool', 'Bullet'], function(appServices, Drawable, Pool, Bullet) {
 
     function Ship(x, y, width, height, angle, alive) {
         var self = this;

@@ -1,6 +1,4 @@
 define(function () {
-	//var Drawable = require("Drawable");
-	//var appServices = require("appServices");
 	
 	function Pool(size, Object, coords, width, height, angle, alive) {
 		var self = this;

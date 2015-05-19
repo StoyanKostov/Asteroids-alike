@@ -1,9 +1,5 @@
 "use strict";
-define(['require', 'appServices'], function () {
-	var appServices = require("appServices");
-
-	appServices.sayHello('Drawable');
-
+define(['appServices'], function (appServices) {
 	function Drawable(x, y, width, height, angle, alive) {
 		var self = this;
 		self.alive = alive;

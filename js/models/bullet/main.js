@@ -1,5 +1,4 @@
-define(['require', 'Drawable'], function (require, exports, module) {
-	var Drawable = require("Drawable");
+define(['Drawable'], function (Drawable) {
 
     function Bullet(x, y, width, height, angle, alive) {
     	var self = this;
