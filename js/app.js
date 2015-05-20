@@ -119,7 +119,10 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 				// Start collusion detection
 				game.collusionDetector.start(function groupCollide(){
 					game.zombiePool.poolList.forEach(function(zombie, index, arr){
+						// Collution between ship and zombies
 						game.collusionDetector.collide(game.ship, zombie);
+
+						// Collution between ship bullets and zombies
 						game.ship.bulletPool.poolList.forEach(function(bullet, index, arr){
 							game.collusionDetector.collide(bullet, zombie);
 						});
