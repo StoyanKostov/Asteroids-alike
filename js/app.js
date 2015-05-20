@@ -104,7 +104,7 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 					);
 
 					// Init collusion detection with set updateIntervalTimeOut
-					this.collusionDetector = new CollusionDetectionService(200);
+					this.collusionDetector = new CollusionDetectionService(100);
 
 					return true;
 				}

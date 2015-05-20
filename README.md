@@ -16,11 +16,11 @@ The game can be played at http://www.skostov.com/games/dark-as-your-soul/
 	css/
 		styles.css		
     js/
-		app.js					--> the main application module
-		appServices.js			--> Shared services and helper functions between Models
 		libs/					--> 3rd party js libraries
 			requirejs/
 				require.js
+
+		app.js					--> the main application module
 		
 		models/
 			background/
@@ -38,6 +38,12 @@ The game can be played at http://www.skostov.com/games/dark-as-your-soul/
 				main.js			--> game ship
 			zombie/
 				main.js			--> game zombies
+
+		collusionDetectionService/
+			main.js				--> Collusion Detection between game objects
+			
+		helperFunctions/
+			main.js				--> Shared helper functions between Models
 		
 ## Game art
 - by me
