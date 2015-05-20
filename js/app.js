@@ -3,8 +3,10 @@
 require.config({
     "packages": [
 		{ 
-			name: 'appServices',
-			main: '../appServices'
+			name: 'helperFunctions',
+		},
+		{ 
+			name: 'collusionDetectionService',
 		},
 		{ 
 			name: 'imageRepository',
@@ -19,13 +21,12 @@ require.config({
 			location: 'models/background',
 		},
 		{ 
-			name: 'Ship',
+			name: 'Ship123',	
 			location: 'models/ship'
 		},
 		{ 
 			name: 'Zombie',
 			location: 'models/zombie'
-			//main: 'main'
 		},
 		{ 
 			name: 'Bullet',
@@ -38,11 +39,9 @@ require.config({
 	]
 });
 var game;
-var zombie;
-require(['appServices', 'imageRepository', 'Drawable', 'Background', 'Ship', 'Zombie', 'Bullet', 'Pool' ],
-function (appServices, imageRepository, Drawable, Background, Ship, Zombie, Bullet, Pool) {
-	zombie = Zombie;
-
+require(['collusionDetectionService', 'helperFunctions', 'imageRepository', 'Drawable', 'Background', 'Ship123', 'Zombie', 'Bullet', 'Pool' ],
+function (CollusionDetectionService, helperFunctions, imageRepository, Drawable, Background, Ship, Zombie, Bullet, Pool) {
+	// Load images
 	var images = [
 		{name: 'backgroundStatic', src: 'images/spaceBg.jpg'},
 		{name: 'background', src: 'images/spaceBg.png'},
@@ -59,6 +58,7 @@ function (appServices, imageRepository, Drawable, Background, Ship, Zombie, Bull
 			console.log('game started');
 		}
 	});
+
 
 	// Facades and Module design pattern
 	game = (function(){
@@ -96,12 +96,15 @@ function (appServices, imageRepository, Drawable, Background, Ship, Zombie, Bull
 					this.zombiePool = new Pool(
 						10,
 						Zombie,
-						appServices.randomCoords,
+						helperFunctions.randomCoords,
 						imageRepository.list.spaceZombie.width,
 						imageRepository.list.spaceZombie.height,
-						appServices.randomAngle,
+						helperFunctions.randomAngle,
 						true
 					);
+
+					// Init collusion detection with set updateIntervalTimeOut
+					this.collusionDetector = new CollusionDetectionService(200);
 
 					return true;
 				}
@@ -111,54 +114,21 @@ function (appServices, imageRepository, Drawable, Background, Ship, Zombie, Bull
 			},
 			// Start the animation loop
 			start : function() {
-				this.ship.draw();
-				//this.zombiePool.poolListExec('draw');
-				CollusionDetector.start();
+				game.ship.draw();
+
+				// Start collusion detection
+				game.collusionDetector.start(function groupCollide(){
+					game.zombiePool.poolList.forEach(function(zombie, index, arr){
+						game.collusionDetector.collide(game.ship, zombie);
+						game.ship.bulletPool.poolList.forEach(function(bullet, index, arr){
+							game.collusionDetector.collide(bullet, zombie);
+						});
+					});
+				});
 				animate();	
 			}
 		}
 	})();
-
-	//TODO Observer patern for pools with bullets and zombies
-	CollusionDetector = new function(){
-		var self = this;
-		self.updateInterval;
-
-		self.start = function(){
-			self.updateInterval = setInterval(function(){ 
-				groupCollide(game.ship, game.zombiePool) 
-			}, 200);
-		}
-		self.stop = function(){
-			clearInterval(self.updateInterval);
-		}
-
-		function groupCollide(ship, zombies){
-			zombies.poolList.forEach(function(zombie, index, arr){
-				collide(ship, zombie);
-				ship.bulletPool.poolList.forEach(function(bullet, index, arr){
-					collide(bullet, zombie);
-				});
-			});
-		}
-
-		function collide(firstObject, secondObject){
-			if (
-				Math.abs(firstObject.getCenter()['x'] - secondObject.getCenter()['x']) <= (firstObject.radius + secondObject.radius) &&
-				Math.abs(firstObject.getCenter()['y'] - secondObject.getCenter()['y']) <= (firstObject.radius + secondObject.radius) &&
-				firstObject.alive && secondObject.alive 
-			) {
-				console.log('collusion detected');
-				//game.zombiePool.getByIndex(secondObjectIndex).die(10);
-				firstObject.die();
-				secondObject.die(10);
-				//game.zombiePool.remove(secondObjectIndex);
-			};
-			
-		}
-
-		return self;
-	}
 
 	//Your callback routine must itself call requestAnimationFrame()
 	//if you want to animate another frame at the next repaint.

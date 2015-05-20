@@ -1,4 +1,4 @@
-define(['Drawable', 'appServices'], function (Drawable, appServices) {
+define(['Drawable', 'helperFunctions'], function (Drawable, helperFunctions) {
        
     function Zombie(x, y, width, height, angle, alive) {
         var self = this;
@@ -9,7 +9,7 @@ define(['Drawable', 'appServices'], function (Drawable, appServices) {
 		self.speed = 0;
 		//self.acc = 0;
 		//self.angle = angle;
-        self.speedReset = appServices.randomSpeedReset();
+        self.speedReset = helperFunctions.randomSpeedReset();
         self.velocity = 0;
     }
     Zombie.prototype = Object.create(Drawable.prototype);
@@ -17,7 +17,7 @@ define(['Drawable', 'appServices'], function (Drawable, appServices) {
 
     Zombie.prototype.die = function(frames){
         var self = this,
-            frames = frames,
+            frames = frames?frames:10,
             angle = 360 / frames,
             alfaCoef = 1 / frames,
             alfa = 1;

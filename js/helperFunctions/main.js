@@ -1,5 +1,5 @@
 define(function () {
-    service = {
+    Service = {
     	sayHello: function(modelName){
     		console.log('hello, I am a service repo from ' + modelName);
     	},
@@ -28,5 +28,5 @@ define(function () {
 			return {'x': Math.cos(angle*Math.PI/180), 'y': Math.sin(angle*Math.PI/180)};
 		}
     };
-    return service;
+    return Service;
 });

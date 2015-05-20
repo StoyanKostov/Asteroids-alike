@@ -1,4 +1,4 @@
-define(['appServices', 'Drawable', 'Pool', 'Bullet'], function(appServices, Drawable, Pool, Bullet) {
+define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctions, Drawable, Pool, Bullet) {
 
     function Ship(x, y, width, height, angle, alive) {
         var self = this;
@@ -15,10 +15,10 @@ define(['appServices', 'Drawable', 'Pool', 'Bullet'], function(appServices, Draw
 		self.bulletPool = new Pool(
 			2,
 			Bullet,
-			appServices.zeroCoords,
+			helperFunctions.zeroCoords,
 			imageRepository.list.bullet.width,
 			imageRepository.list.bullet.height,
-			appServices.zeroAngle,
+			helperFunctions.zeroAngle,
 			false
 		);
 
@@ -40,7 +40,7 @@ define(['appServices', 'Drawable', 'Pool', 'Bullet'], function(appServices, Draw
     Ship.prototype.fire = function(){
     	console.log('fire');
     	var self = this,
-    		shipAngleAsVector = appServices.angleToVector(self.angle);
+    		shipAngleAsVector = helperFunctions.angleToVector(self.angle);
 
     	// var onReuse = function(shipAngleAsVector, bullet){
     	// 	bullet.startlifeCycle(700);

@@ -1,5 +1,5 @@
 "use strict";
-define(['appServices'], function (appServices) {
+define(['helperFunctions'], function (helperFunctions) {
 	function Drawable(x, y, width, height, angle, alive) {
 		var self = this;
 		self.alive = alive;
@@ -24,7 +24,7 @@ define(['appServices'], function (appServices) {
 	
 	Drawable.prototype.updateVelocity = function(){
 		var self = this;
-		self.velocity = appServices.angleToVector(self.angle); //returns {'x': value, 'y': value}
+		self.velocity = helperFunctions.angleToVector(self.angle); //returns {'x': value, 'y': value}
 	}
     
     Drawable.prototype.move = function(){
