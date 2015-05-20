@@ -21,7 +21,7 @@ require.config({
 			location: 'models/background',
 		},
 		{ 
-			name: 'Ship123',	
+			name: 'Ship',	
 			location: 'models/ship'
 		},
 		{ 
@@ -39,7 +39,7 @@ require.config({
 	]
 });
 var game;
-require(['collusionDetectionService', 'helperFunctions', 'imageRepository', 'Drawable', 'Background', 'Ship123', 'Zombie', 'Bullet', 'Pool' ],
+require(['collusionDetectionService', 'helperFunctions', 'imageRepository', 'Drawable', 'Background', 'Ship', 'Zombie', 'Bullet', 'Pool' ],
 function (CollusionDetectionService, helperFunctions, imageRepository, Drawable, Background, Ship, Zombie, Bullet, Pool) {
 	// Load images
 	var images = [
