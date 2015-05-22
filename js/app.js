@@ -4,37 +4,37 @@
 //http://atomicrobotdesign.com/blog/web-development/how-to-use-sprite-sheets-with-html5-canvas/
 require.config({
     "packages": [
-		{ 
+		{
 			name: 'helperFunctions',
 		},
-		{ 
+		{
 			name: 'collusionDetectionService',
 		},
-		{ 
+		{
 			name: 'imageRepository',
 			location: 'models/imageRepository'
 		},
-		{ 
+		{
 			name: 'Drawable',
 			location: 'models/drawable'
 		},
-		{ 
+		{
 			name: 'Background',
 			location: 'models/background',
 		},
-		{ 
-			name: 'Ship',	
+		{
+			name: 'Ship',
 			location: 'models/ship'
 		},
-		{ 
+		{
 			name: 'Zombie',
 			location: 'models/zombie'
 		},
-		{ 
+		{
 			name: 'Bullet',
 			location: 'models/bullet'
 		},
-		{ 
+		{
 			name: 'Pool',
 			location: 'models/pool'
 		}
@@ -52,7 +52,7 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 		{name: 'spaceShipShieldsOn', src: 'images/spaceShipBodyShieldsOn.png'},
 		{name: 'spaceZombie', src: 'images/spaceZombie.png'},
 		{name: 'bullet', src: 'images/bullet.png'},
-	]
+	];
 
 	imageRepository.initImages(images, function(){
 		console.log('all images loaded');
@@ -116,8 +116,8 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 						[
 							{'first': game.zombiePool.poolList, 'second': [game.ship]},
 							{'first': game.zombiePool.poolList, 'second': game.ship.bulletPool.poolList}
-						], 
-						Drawable, 
+						],
+						Drawable,
 						100
 					);
 
@@ -135,19 +135,19 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 				// Start collusion detection
 				// Start collusion detection
 				// game.collusionDetector.start(function groupCollide(){
-				// 	game.zombiePool.poolList.forEach(function(zombie, index, arr){
-				// 		// Collution between ship and zombies
-				// 		game.collusionDetector.collide(game.ship, zombie);
+				// game.zombiePool.poolList.forEach(function(zombie, index, arr){
+				//		// Collution between ship and zombies
+				//		game.collusionDetector.collide(game.ship, zombie);
 
-				// 		// Collution between ship bullets and zombies
-				// 		game.ship.bulletPool.poolList.forEach(function(bullet, index, arr){
-				// 			game.collusionDetector.collide(bullet, zombie);
-				// 		});
-				// 	});
+				//		// Collution between ship bullets and zombies
+				//		game.ship.bulletPool.poolList.forEach(function(bullet, index, arr){
+				//			game.collusionDetector.collide(bullet, zombie);
+				//		});
+				//	});
 				// });
-				animate();	
+				animate();
 			}
-		}
+		};
 	})();
 
 	//Your callback routine must itself call requestAnimationFrame()
@@ -167,7 +167,7 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 		game.background.draw();
 		if (game.ship.alive) {
 			game.ship.update();
-		};
+		}
 		game.zombiePool.update();
 		requestAnimFrame(animate);
 	}

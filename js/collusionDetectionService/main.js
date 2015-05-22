@@ -18,16 +18,16 @@ define([], function() {
 	// 	}, self.updateIntervalTimeOut);
 	// }
 
+	CollusionDetector.prototype.stop = function(){
+		var self = this;
+		clearInterval(self.updateInterval);
+	}
+	
 	CollusionDetector.prototype.start = function(){
 		var self = this;
 		self.updateInterval = setInterval(function(){
 			self.groupCollide();
 		}, self.updateIntervalTimeOut);
-	}
-
-	CollusionDetector.prototype.stop = function(){
-		var self = this;
-		clearInterval(self.updateInterval);
 	}
 
 	CollusionDetector.prototype.groupCollide = function(){
