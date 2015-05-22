@@ -1,5 +1,7 @@
 //http://tech.pro/blog/1561/five-helpful-tips-when-using-requirejs
 //http://www.htmlgoodies.com/html5/client/how-to-build-asteroids-with-the-impact-html5-game-engine-modules.html#fbid=xr3JNmMgN2A
+//http://jondavidjohn.com/extend-javascript-functions/
+//http://atomicrobotdesign.com/blog/web-development/how-to-use-sprite-sheets-with-html5-canvas/
 require.config({
     "packages": [
 		{ 
@@ -39,6 +41,7 @@ require.config({
 	]
 });
 var game;
+var myDrawable;
 require(['collusionDetectionService', 'helperFunctions', 'imageRepository', 'Drawable', 'Background', 'Ship', 'Zombie', 'Bullet', 'Pool' ],
 function (CollusionDetectionService, helperFunctions, imageRepository, Drawable, Background, Ship, Zombie, Bullet, Pool) {
 	// Load images
@@ -59,6 +62,11 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 		}
 	});
 
+	myDrawable = Drawable;
+
+	function Foo(){
+		var self = this;
+	}
 
 	// Facades and Module design pattern
 	game = (function(){
@@ -103,8 +111,15 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 						true
 					);
 
-					// Init collusion detection with set updateIntervalTimeOut
-					this.collusionDetector = new CollusionDetectionService(100);
+					// Init collusion detection with Abstract object witch implements properies of colliding objects and set updateIntervalTimeOut
+					this.collusionDetector = new CollusionDetectionService(
+						[
+							{'first': game.zombiePool.poolList, 'second': [game.ship]},
+							{'first': game.zombiePool.poolList, 'second': game.ship.bulletPool.poolList}
+						], 
+						Drawable, 
+						100
+					);
 
 					return true;
 				}
@@ -115,19 +130,21 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 			// Start the animation loop
 			start : function() {
 				game.ship.draw();
+				game.collusionDetector.start();
 
 				// Start collusion detection
-				game.collusionDetector.start(function groupCollide(){
-					game.zombiePool.poolList.forEach(function(zombie, index, arr){
-						// Collution between ship and zombies
-						game.collusionDetector.collide(game.ship, zombie);
+				// Start collusion detection
+				// game.collusionDetector.start(function groupCollide(){
+				// 	game.zombiePool.poolList.forEach(function(zombie, index, arr){
+				// 		// Collution between ship and zombies
+				// 		game.collusionDetector.collide(game.ship, zombie);
 
-						// Collution between ship bullets and zombies
-						game.ship.bulletPool.poolList.forEach(function(bullet, index, arr){
-							game.collusionDetector.collide(bullet, zombie);
-						});
-					});
-				});
+				// 		// Collution between ship bullets and zombies
+				// 		game.ship.bulletPool.poolList.forEach(function(bullet, index, arr){
+				// 			game.collusionDetector.collide(bullet, zombie);
+				// 		});
+				// 	});
+				// });
 				animate();	
 			}
 		}

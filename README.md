@@ -1,12 +1,11 @@
 # JavaScript remake of Asteroids game
+The game can be played at http://www.skostov.com/games/dark-as-your-soul/
 
 ## Used design patterns
 - Prototype Pattern 
 - Facades and Module design pattern
 - Singelton design pattern
 - Pool
-
-The game can be played at http://www.skostov.com/games/dark-as-your-soul/
 
 ## Application Directory Layout
 	index.html					--> app layout file (the main html template file of the app)

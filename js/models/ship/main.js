@@ -1,12 +1,10 @@
 define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctions, Drawable, Pool, Bullet) {
-
     function Ship(x, y, width, height, angle, alive) {
         var self = this;
         Drawable.call(self, x, y, width, height, angle, alive);
 
     	self.angleVelocity = 3;
 		self.slowDownFactor = 0.03;
-		self.invinsible = false;
 		self.livesCount = 3;
 		self.speed = 0;
 		self.acc = 0;
@@ -21,7 +19,6 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
 			helperFunctions.zeroAngle,
 			false
 		);
-
 		return self;
     }
     Ship.prototype = Object.create(Drawable.prototype);
@@ -38,22 +35,9 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
     }
 
     Ship.prototype.fire = function(){
-    	console.log('fire');
     	var self = this,
-    		shipAngleAsVector = helperFunctions.angleToVector(self.angle);
-
-    	// var onReuse = function(shipAngleAsVector, bullet){
-    	// 	bullet.startlifeCycle(700);
-	    // 	bullet.angle = self.angle;
-	    // 	bullet.speed = self.speed + 8;
-	    // 	bullet.position.x = self.getCenter().x - bullet.pivot.x + shipAngleAsVector['x']*self.radius;
-	    // 	bullet.position.y = self.getCenter().y - bullet.pivot.y + shipAngleAsVector['y']*self.radius;
-    	// }
-
-    	//self.bulletPool.reuse(shipAngleAsVector, onReuse);
-
-
-    	var bullet = self.bulletPool.getFirst();
+    		shipAngleAsVector = helperFunctions.angleToVector(self.angle),
+    		bullet = self.bulletPool.getFirst();
     	
     	if (!bullet.alive) {
 	    	bullet.startlifeCycle(700);
@@ -64,7 +48,14 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
     	};
 
     	self.bulletPool.putLast(bullet);
+    }
 
+    Ship.prototype.setInvinsibleMode = function(delay){
+    	var self = this;
+    	self.invinsible = true;
+    	setTimeout(function(){ 
+    		self.invinsible = false; 
+    	}, delay);
     }
 
     Ship.prototype.update = function(){

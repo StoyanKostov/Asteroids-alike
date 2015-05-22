@@ -17,6 +17,7 @@ define(['helperFunctions'], function (helperFunctions) {
 		self.pivot["y"] = height/2;
 		self.radius = width/2;
 		self.angleVelocity = 0;
+		self.invinsible = false;
 		self.velocity = {};
 
 		return self;
