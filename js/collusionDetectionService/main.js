@@ -38,7 +38,8 @@ define([], function() {
 			if (
 				Math.abs(firstObject.getCenter()['x'] - secondObject.getCenter()['x']) <= (firstObject.radius + secondObject.radius) &&
 				Math.abs(firstObject.getCenter()['y'] - secondObject.getCenter()['y']) <= (firstObject.radius + secondObject.radius) &&
-				firstObject.alive && secondObject.alive
+				firstObject.alive && !firstObject.invinsible &&
+				secondObject.alive && !secondObject.invinsible
 			) {
 				firstObject.die();
 				secondObject.die();

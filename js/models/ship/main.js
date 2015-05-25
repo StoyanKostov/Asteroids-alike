@@ -53,8 +53,10 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
     Ship.prototype.setInvinsibleMode = function(delay){
 		var self = this;
 		self.invinsible = true;
+		console.log('self.invinsible: ', self.invinsible);
 		setTimeout(function(){
 			self.invinsible = false;
+			console.log('self.invinsible: ', self.invinsible);
 		}, delay);
     };
 
@@ -99,6 +101,10 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
 		if(KEY_STATUS.space['keyDown'] && !KEY_STATUS.space['disable']){
 			KEY_STATUS.space['disable'] = true;
 			self.fire();
+		}
+		// set invisible mode
+		if(KEY_STATUS.down['keyDown']){
+			self.setInvinsibleMode(3000);
 		}
     };
 

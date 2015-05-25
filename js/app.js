@@ -130,6 +130,7 @@ function (CollusionDetectionService, helperFunctions, imageRepository, Drawable,
 			// Start the animation loop
 			start : function() {
 				game.ship.draw();
+				game.ship.setInvinsibleMode(3000);
 				game.collusionDetector.start();
 
 				// Start collusion detection
