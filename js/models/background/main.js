@@ -3,7 +3,7 @@ define(['Drawable'], function(Drawable) {
 		// Create space background
 		function Background(x, y, width, height) {
 			var self = this;
-			Drawable.call(self, x, y, width, height)
+			Drawable.call(self, x, y, width, height);
 			self.speed = 0.05; // Redefine speed of the background for panning
 			return self;
 		}
@@ -27,5 +27,5 @@ define(['Drawable'], function(Drawable) {
 			}
 		};
 
-    	return Background;
+		return Background;
 });

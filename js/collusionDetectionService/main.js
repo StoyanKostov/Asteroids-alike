@@ -9,26 +9,17 @@ define([], function() {
 		return self;
 	}
 
-	// CollusionDetector.prototype.start = function(callBack){
-	// 	var self = this;
-	// 	self.updateInterval = setInterval(function(){
-	// 		if (typeof callBack === 'function') {
-	// 			callBack(self.collidingObjectGroups);
-	// 		};
-	// 	}, self.updateIntervalTimeOut);
-	// }
-
 	CollusionDetector.prototype.stop = function(){
 		var self = this;
 		clearInterval(self.updateInterval);
-	}
+	};
 	
 	CollusionDetector.prototype.start = function(){
 		var self = this;
 		self.updateInterval = setInterval(function(){
 			self.groupCollide();
 		}, self.updateIntervalTimeOut);
-	}
+	};
 
 	CollusionDetector.prototype.groupCollide = function(){
 		var self = this;
@@ -39,7 +30,7 @@ define([], function() {
 				});
 			});
 		});
-	}
+	};
 
 	CollusionDetector.prototype.collide = function(firstObject, secondObject){
 		var self = this;
@@ -47,16 +38,16 @@ define([], function() {
 			if (
 				Math.abs(firstObject.getCenter()['x'] - secondObject.getCenter()['x']) <= (firstObject.radius + secondObject.radius) &&
 				Math.abs(firstObject.getCenter()['y'] - secondObject.getCenter()['y']) <= (firstObject.radius + secondObject.radius) &&
-				firstObject.alive && secondObject.alive 
+				firstObject.alive && secondObject.alive
 			) {
 				firstObject.die();
 				secondObject.die();
-			};
+			}
 		}
 		else{
 			throw 'Objects must inherit from' + self.objectsInterface;
-		};
-	}
+		}
+	};
 
     return CollusionDetector;
 });

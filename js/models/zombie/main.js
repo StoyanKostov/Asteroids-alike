@@ -4,7 +4,7 @@ define(['Drawable', 'helperFunctions'], function (Drawable, helperFunctions) {
         var self = this;
         Drawable.call(self, x, y, width, height, angle, alive);
         
-    	//self.angleVelocity = 3;
+        //self.angleVelocity = 3;
 		self.slowDownFactor = 0.03;
 		self.speed = 0;
 		//self.acc = 0;
@@ -23,7 +23,7 @@ define(['Drawable', 'helperFunctions'], function (Drawable, helperFunctions) {
             alfa = 1;
         
         self.alive = false;
-        var setDieInterval = setInterval(function(){ 
+        var setDieInterval = setInterval(function(){
             frames--;
             self.delete();
             self.angle += angle;
@@ -31,26 +31,26 @@ define(['Drawable', 'helperFunctions'], function (Drawable, helperFunctions) {
             if (frames <= 0) {
                 clearInterval(setDieInterval);
                 self.delete();
-            };
+            }
             alfa -= alfaCoef;
         }, 15);
-    }
+    };
 
     Zombie.prototype.update = function(){
-    	var self = this;
-    	if (self.speed < self.speedReset) {
-    		self.speed = 5;
-    		self.angle = -self.angle * (Math.round((Math.random()*10))%4);
-    	};
+        var self = this;
+        if (self.speed < self.speedReset) {
+            self.speed = 5;
+            self.angle = -self.angle * (Math.round((Math.random()*10))%4);
+        }
 
-    	if (self.angle > 360) {
-    		self.angle = self.angle%360;
-    	};
-    	self.speed -= self.slowDownFactor;
-    	self.angle += 0.5;
+        if (self.angle > 360) {
+            self.angle = self.angle%360;
+        }
+        self.speed -= self.slowDownFactor;
+        self.angle += 0.5;
 
         self.move();
-    }
+    };
 
 
     return Zombie;

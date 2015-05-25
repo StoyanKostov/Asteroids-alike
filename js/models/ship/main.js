@@ -3,7 +3,7 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
         var self = this;
         Drawable.call(self, x, y, width, height, angle, alive);
 
-    	self.angleVelocity = 3;
+		self.angleVelocity = 3;
 		self.slowDownFactor = 0.03;
 		self.livesCount = 3;
 		self.speed = 0;
@@ -25,92 +25,92 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
     Ship.prototype.constructor = Ship;
 
     Ship.prototype.die = function(){
-    	var self = this;
+		var self = this;
 		self.livesCount -= 1;
 		if (self.livesCount <= 0) {
 			self.alive = false;
 			self.delete();
 			alert('Game over');
-		};
-    }
+		}
+    };
 
     Ship.prototype.fire = function(){
-    	var self = this,
-    		shipAngleAsVector = helperFunctions.angleToVector(self.angle),
-    		bullet = self.bulletPool.getFirst();
-    	
-    	if (!bullet.alive) {
-	    	bullet.startlifeCycle(700);
-	    	bullet.angle = self.angle;
-	    	bullet.speed = self.speed + 8;
-	    	bullet.position.x = self.getCenter().x - bullet.pivot.x + shipAngleAsVector['x']*self.radius;
-	    	bullet.position.y = self.getCenter().y - bullet.pivot.y + shipAngleAsVector['y']*self.radius;
-    	};
+		var self = this,
+			shipAngleAsVector = helperFunctions.angleToVector(self.angle),
+			bullet = self.bulletPool.getFirst();
 
-    	self.bulletPool.putLast(bullet);
-    }
-
-    Ship.prototype.setInvinsibleMode = function(delay){
-    	var self = this;
-    	self.invinsible = true;
-    	setTimeout(function(){ 
-    		self.invinsible = false; 
-    	}, delay);
-    }
-
-    Ship.prototype.update = function(){
-    	var self = this;
-    	self.bulletPool.update();
-		// Move forward
-		if (KEY_STATUS.up['keyDown']) {
-    		if (self.speed != 3) {
-				self.speed = 3;
-    		};
-    		self.delete();
-    		self.move();
-    		//self.draw();
+		if (!bullet.alive) {
+			bullet.startlifeCycle(700);
+			bullet.angle = self.angle;
+			bullet.speed = self.speed + 8;
+			bullet.position.x = self.getCenter().x - bullet.pivot.x + shipAngleAsVector['x']*self.radius;
+			bullet.position.y = self.getCenter().y - bullet.pivot.y + shipAngleAsVector['y']*self.radius;
 		}
 
-	    if (self.speed != 0) {
-	    	if (self.speed > 0 ) {
-			    self.delete();
-			    self.draw();
-	    		self.move();
+		self.bulletPool.putLast(bullet);
+    };
+
+    Ship.prototype.setInvinsibleMode = function(delay){
+		var self = this;
+		self.invinsible = true;
+		setTimeout(function(){
+			self.invinsible = false;
+		}, delay);
+    };
+
+    Ship.prototype.update = function(){
+		var self = this;
+		self.bulletPool.update();
+		// Move forward
+		if (KEY_STATUS.up['keyDown']) {
+			if (self.speed != 3) {
+				self.speed = 3;
+			}
+			self.delete();
+			self.move();
+			//self.draw();
+		}
+
+		if (self.speed !== 0) {
+			if (self.speed > 0 ) {
+				self.delete();
+				self.draw();
+				self.move();
 				self.speed -= self.slowDownFactor;
 			}
 			else{
 				self.speed = 0;
 			}
-	    };
+		}
 
 		// Rotate Left
 		if(KEY_STATUS.left['keyDown']){
 			self.angle += -self.angleVelocity;
 			self.delete();
 			self.draw();
-		};
+		}
 		// Rotate Right
 		if(KEY_STATUS.right['keyDown']){
 			self.angle += self.angleVelocity;
 			self.delete();
 			self.draw();
-		};
+		}
 		// fire
 		if(KEY_STATUS.space['keyDown'] && !KEY_STATUS.space['disable']){
 			KEY_STATUS.space['disable'] = true;
 			self.fire();
-		};
-    }
+		}
+    };
 
 	// The keycodes that will be mapped when a user presses a button.
 	// Original code by Doug McInnes
 	KEY_CODES = {
-	  32: 'space',
-	  37: 'left',
-	  38: 'up',
-	  39: 'right',
-	  40: 'down'
-	}
+		32: 'space',
+		37: 'left',
+		38: 'up',
+		39: 'right',
+		40: 'down'
+	};
 
 	// Creates the array to hold the KEY_CODES and sets all their values
 	// to false. Checking true/flase is the quickest way to check status
@@ -136,7 +136,7 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
 			e.preventDefault();
 			KEY_STATUS[KEY_CODES[keyCode]]['keyDown'] = true;
 		}
-	}
+	};
 	/**
 	 * Sets up the document to listen to ownkeyup events (fired when
 	 * any key on the keyboard is released). When a key is released,
@@ -150,7 +150,7 @@ define(['helperFunctions', 'Drawable', 'Pool', 'Bullet'], function(helperFunctio
 			KEY_STATUS[KEY_CODES[keyCode]]['disable'] = false;
 			KEY_STATUS[KEY_CODES[keyCode]]['keyDown'] = false;
 		}
-	}
+	};
     
     return Ship;
 });

@@ -11,23 +11,21 @@ define(function () {
 
 			inputArray.forEach(function(item, index, arr){
 				var currImage = new Image();
-				item['name']
-				item['src']
 				currImage.onload = function() {
 					numLoaded++;
 					if (numLoaded === inputArrayLenght) {
 						if (typeof callback === 'function') {
 							callback();
-						};
+						}
 					}
-				}
+				};
 				currImage.src = item.src;
 				self.list[item.name] = currImage;
 			});
 
-		}
+		};
 		return self;
-	}
+	};
 
 	return imageRepository;
 });

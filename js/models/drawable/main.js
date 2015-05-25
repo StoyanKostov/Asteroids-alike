@@ -1,5 +1,5 @@
-"use strict";
 define(['helperFunctions'], function (helperFunctions) {
+	"use strict";
 	function Drawable(x, y, width, height, angle, alive) {
 		var self = this;
 		self.alive = alive;
@@ -26,51 +26,51 @@ define(['helperFunctions'], function (helperFunctions) {
 	Drawable.prototype.updateVelocity = function(){
 		var self = this;
 		self.velocity = helperFunctions.angleToVector(self.angle); //returns {'x': value, 'y': value}
-	}
+	};
     
     Drawable.prototype.move = function(){
-    	var self = this;
+		var self = this;
 		self.updateVelocity();
 		self.position.x = self.position.x + self.velocity.x * self.speed;
 		self.position.y = self.position.y + self.velocity.y * self.speed;
 
 		if (self.position.y >= self.canvasHeight) {
 			self.position.y = ((self.position.y % self.canvasHeight) + self.canvasHeight) % self.canvasHeight -self.height;
-		};
+		}
 		if (self.position.y <= -self.height) {
 			self.position.y = ((self.position.y % self.canvasHeight) + self.canvasHeight) % self.canvasHeight + self.height;
-		};
+		}
 		if (self.position.x >= self.canvasWidth) {
 			self.position.x = ((self.position.x % self.canvasWidth) + self.canvasWidth) % self.canvasWidth - self.width;
-		};
+		}
 		if (self.position.x  <= -self.width) {
 			self.position.x = ((self.position.x % self.canvasWidth) + self.canvasWidth) % self.canvasWidth + self.width;
-		};
-	}
+		}
+	};
 
 	Drawable.prototype.getCenter = function(){
 		var self = this;
 		return {
 			'x': self.position["x"] + self.pivot["x"],
 			'y': self.position["y"] + self.pivot["y"]
-		}
-	}
+		};
+	};
 
     Drawable.prototype.draw = function(alpha){
-    	var self = this,
+		var self = this,
             opacity = alpha?alpha:1;
-	    self.context.save();
-	    self.context.translate(self.position.x + self.pivot.x, self.position.y + self.pivot.y);
-        self.context.rotate(self.angle*Math.PI/180);
-	    self.context.globalAlpha = opacity;
-	    self.context.drawImage(self.image, -self.pivot.x, -self.pivot.y);
-	    self.context.restore();
-    }
+		self.context.save();
+		self.context.translate(self.position.x + self.pivot.x, self.position.y + self.pivot.y);
+		self.context.rotate(self.angle*Math.PI/180);
+		self.context.globalAlpha = opacity;
+		self.context.drawImage(self.image, -self.pivot.x, -self.pivot.y);
+		self.context.restore();
+    };
 
     Drawable.prototype.delete = function(){
         var self = this;
         self.context.clearRect(self.position.x, self.position.y, self.width, self.height);
-    }
+    };
 
 	return Drawable;
 });

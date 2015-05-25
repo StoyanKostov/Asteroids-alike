@@ -13,7 +13,7 @@ define(function () {
 		self.poolList = Array.apply(null, new Array(size)).map(function(item){
 			return new Object(coords()['x'], coords()['y'], width, height, angle(), alive);
 		});
-	}
+	};
 
 	// Pool.prototype.add = function(item){
 	// 	var self = this;
@@ -42,17 +42,17 @@ define(function () {
 	Pool.prototype.getFirst = function(){
 		var self = this;
 		return self.poolList.shift();
-	}
+	};
 
 	Pool.prototype.putLast = function(bullet){
 		var self = this;
 		return self.poolList.push(bullet);
-	}
+	};
 	
 	Pool.prototype.getByIndex = function(index){
 		var self = this;
 		return self.poolList[index];
-	}
+	};
 
 	Pool.prototype.poolListExec = function(action){
 		var self = this;
@@ -61,14 +61,14 @@ define(function () {
 				item[action]();
 			}
 		});
-	}
+	};
 
 	Pool.prototype.update = function(){
 		var self = this;
 			self.poolListExec('delete');
 		self.poolListExec('update');
 		self.poolListExec('draw');
-	}
+	};
 
 	return Pool;
 });

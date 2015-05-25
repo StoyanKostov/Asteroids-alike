@@ -1,15 +1,15 @@
 define(function () {
     Service = {
-    	sayHello: function(modelName){
-    		console.log('hello, I am a service repo from ' + modelName);
-    	},
-    	randomCoords: function(){
+		// sayHello: function(modelName){
+		// 	console.log('hello, I am a service repo from ' + modelName);
+		// },
+		randomCoords: function(){
 			return {
 				'x': Math.floor((Math.random() * 1280) + 1),
 				'y': Math.floor((Math.random() * 960) + 1)
 			};
 		},
-    	zeroCoords: function(){
+		zeroCoords: function(){
 			return {
 				'x': 0,
 				'y': 0
